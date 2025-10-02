@@ -9,6 +9,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UsageByDayChart } from "./UsageByDayChart";
 import { UsageByModelChart } from "./UsageByModelChart";
+import { UsageDataTable } from "./UsageDataTable";
 import { DateFilter } from "./DateFilter";
 import { BarChart3, DollarSign, Hash, TrendingUp } from "lucide-react";
 import {
@@ -141,6 +142,7 @@ export const Dashboard = ({ data }: DashboardProps) => {
         <TabsList>
           <TabsTrigger value="usage-by-day">Usage by Day</TabsTrigger>
           <TabsTrigger value="usage-by-model">Usage by Model</TabsTrigger>
+          <TabsTrigger value="data-table">Data Table</TabsTrigger>
         </TabsList>
 
         <TabsContent value="usage-by-day">
@@ -149,6 +151,10 @@ export const Dashboard = ({ data }: DashboardProps) => {
 
         <TabsContent value="usage-by-model">
           <UsageByModelChart data={usageByModelAndDay} />
+        </TabsContent>
+
+        <TabsContent value="data-table">
+          <UsageDataTable data={filteredData} />
         </TabsContent>
       </Tabs>
     </div>
