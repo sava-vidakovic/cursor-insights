@@ -10,6 +10,7 @@ import {
 } from "./components/ui/card";
 import { ThemeProvider } from "./components/theme-provider";
 import { ThemeSwitcher } from "./components/theme-switcher";
+import { Footer } from "./components/Footer";
 import { Brain } from "lucide-react";
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="cursor-insights-theme">
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto py-8 px-4">
+      <div className="min-h-screen bg-background flex flex-col">
+        <div className="container mx-auto py-8 px-4 flex-1">
           <div className="flex justify-between items-start mb-8">
             <div className="text-center flex-1">
               <div className="flex items-center justify-center gap-2 mb-4">
@@ -63,6 +64,7 @@ function App() {
             </div>
           )}
         </div>
+        <Footer />
       </div>
     </ThemeProvider>
   );
