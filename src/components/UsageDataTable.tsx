@@ -30,7 +30,6 @@ import {
   ChevronDown,
   ChevronsUpDown,
   Download,
-  Filter,
   X,
 } from "lucide-react";
 import { formatCurrency, formatNumber, formatDate } from "@/lib/utils";
@@ -102,33 +101,9 @@ export const UsageDataTable = ({ data }: UsageDataTableProps) => {
     return [];
   }, [data]);
 
-  // Get the actual request type column name
-  const requestTypeColumn = useMemo(() => {
-    const possibleColumns = [
-      "Kind",
-      "Request Type",
-      "Type",
-      "RequestType",
-      "Request_Type",
-    ];
-    let foundColumn = possibleColumns.find((col) => data[0]?.[col]);
-
-    if (!foundColumn) {
-      const allColumns = Object.keys(data[0] || {});
-      foundColumn = allColumns.find(
-        (col) =>
-          col.toLowerCase().includes("type") ||
-          col.toLowerCase().includes("request") ||
-          col.toLowerCase().includes("kind")
-      );
-    }
-
-    return foundColumn || "Kind";
-  }, [data]);
-
   // Filter and sort data
   const filteredAndSortedData = useMemo(() => {
-    let filtered = data.filter((row) => {
+    const filtered = data.filter((row) => {
       const matchesSearch =
         row.Model?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         row.Kind?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -144,8 +119,8 @@ export const UsageDataTable = ({ data }: UsageDataTableProps) => {
 
     // Sort data
     filtered.sort((a, b) => {
-      let aValue: any = a[sortField];
-      let bValue: any = b[sortField];
+      let aValue: string | number | Date = a[sortField];
+      let bValue: string | number | Date = b[sortField];
 
       if (sortField === "Date") {
         aValue = new Date(aValue).getTime();
